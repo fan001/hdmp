@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache name="es">
+
+    <diskStore path="java.io.tmpdir"/>
+
+    <cache name="gsm-message-cache"
+           maxEntriesLocalHeap="500"
+           eternal="false"
+           timeToIdleSeconds="10"
+           timeToLiveSeconds="10"
+           overflowToDisk="false"
+           statistics="true">
+
+    </cache>
+    <!-- 登录记录缓存 锁定10分钟 -->
+    <cache name="passwordRetryCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <cache name="role-cache1"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <cache name="authorizationCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <cache name="authenticationCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <cache name="shiro-activeSessionCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <cache name="tradeModelActiveCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <cache name="databookParentId"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <cache name="databookCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <cache name="goodsCacheByDBID"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <cache name="moduleCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+    <cache name="locationList"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <cache name="location"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+</ehcache>

@@ -1,0 +1,44 @@
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    name: hdmp
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  redis:
+    database: 1
+    host: 59.110.240.170
+    port: 6379
+    pool:
+    jedis:
+      pool:
+        max-active: 1000
+        max-wait: -1ms
+        max-idle: 10
+        min-idle: 5
+  profiles:
+    active: dev
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  thymeleaf:
+    cache: false
+    suffix: .html
+    encoding: UTF-8
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+
+
+
+
