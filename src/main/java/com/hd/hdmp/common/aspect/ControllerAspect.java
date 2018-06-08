@@ -41,6 +41,7 @@ public class ControllerAspect {
     @Around("performance()")
     public Object handlerController(ProceedingJoinPoint point) throws Throwable {
         Long start = System.currentTimeMillis();
+        System.out.println("aa");
         ResultBean<?> resultBean;
         HdmpSysLog sysLog = new HdmpSysLog();
         sysLog.setIsSuccess(true);
