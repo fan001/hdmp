@@ -1,0 +1,1 @@
+此项目为基于springboot+shiro+ehcahe+jpa的模板项目，可以基于此进行项目开发
