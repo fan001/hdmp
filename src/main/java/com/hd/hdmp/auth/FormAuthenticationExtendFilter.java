@@ -75,6 +75,7 @@ public class FormAuthenticationExtendFilter extends FormAuthenticationFilter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         httpResponse.setContentType("application/json;charset=utf-8");
         httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+        System.out.println("aaaaaaaaa:" + HttpContextUtils.getOrigin() );
         httpResponse.setHeader("Access-Control-Allow-Origin", HttpContextUtils.getOrigin());
         String json = new Gson().toJson(resultBean);
         try {

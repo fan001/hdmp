@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author fanzhenxing
  * @create 2018/6/8 8:43 AM
  */
-@Controller
+@RestController
 public class LoginController extends BaseController {
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -22,7 +23,7 @@ public class LoginController extends BaseController {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(HttpServletRequest request, Model model) {
+    public String login(HttpServletRequest request) {
         String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
         String error = null;
         if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
@@ -32,7 +33,7 @@ public class LoginController extends BaseController {
         } else if (exceptionClassName != null) {
             error = "其他错误：" + exceptionClassName;
         }
-        model.addAttribute("message", error);
+
         return "login";
 
 

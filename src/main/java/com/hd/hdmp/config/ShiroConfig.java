@@ -1,5 +1,6 @@
 package com.hd.hdmp.config;
 
+import com.hd.hdmp.auth.FormAuthenticationExtendFilter;
 import com.hd.hdmp.auth.RetryLimitHashedCredentialsMatcher;
 import com.hd.hdmp.auth.UserRealm;
 import org.apache.shiro.mgt.SecurityManager;
@@ -37,7 +38,7 @@ public class ShiroConfig {
 
     @Bean
     public FormAuthenticationFilter formAuthenticationFilter() {
-        FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationFilter();
+        FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationExtendFilter();
         formAuthenticationFilter.setLoginUrl("/login");
         formAuthenticationFilter.setUsernameParam("username");
         formAuthenticationFilter.setPasswordParam("password");
@@ -65,7 +66,7 @@ public class ShiroConfig {
 
         Map<String, String> filterMap = new LinkedHashMap<>();
         filterMap.put("/login", "authc");
-        filterMap.put("/**", "anon");
+        filterMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
