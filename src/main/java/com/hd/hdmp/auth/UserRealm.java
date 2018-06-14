@@ -37,10 +37,9 @@ public class UserRealm extends AuthorizingRealm {
         ShiroUser shiroUser = new ShiroUser(staffinfoEntity.getId(),staffinfoEntity.getUsername()
                 ,staffinfoEntity.getName(), Sets.newHashSet(),Sets.newHashSet());
 
-        //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 shiroUser, //用户名
-                staffinfoEntity.getPassword(), //短信验证码
+                staffinfoEntity.getPassword(), //
                 ByteSource.Util.bytes(staffinfoEntity.getCredentialsSalt()),
                 getName()  //realm name
         );

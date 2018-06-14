@@ -44,6 +44,7 @@ dependencies {
 	compile("mysql:mysql-connector-java:${mysqlVersion}")
 	compile("org.apache.shiro:shiro-core:${shiroVersion}")
 	compile("org.apache.shiro:shiro-ehcache:${shiroVersion}")
+	compile("org.apache.shiro:shiro-quartz:${shiroVersion}")
 	compile("org.apache.shiro:shiro-spring:${shiroVersion}")
 	compile("io.jsonwebtoken:jjwt:${jwtVersion}")
 	compile("io.springfox:springfox-swagger2:${swaggerVersion}")

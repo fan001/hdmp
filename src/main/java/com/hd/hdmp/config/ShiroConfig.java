@@ -5,6 +5,8 @@ import com.hd.hdmp.auth.RetryLimitHashedCredentialsMatcher;
 import com.hd.hdmp.auth.UserRealm;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
+import org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -30,9 +32,19 @@ public class ShiroConfig {
 
     @Bean("sessionManager")
     public SessionManager sessionManager() {
+
+        EnterpriseCacheSessionDAO sessionDAO = new EnterpriseCacheSessionDAO();
+        QuartzSessionValidationScheduler sessionValidationScheduler = new QuartzSessionValidationScheduler();
+        sessionValidationScheduler.setSessionValidationInterval(1800000);
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        sessionManager.setSessionValidationScheduler(sessionValidationScheduler);
         sessionManager.setSessionValidationSchedulerEnabled(true);
         sessionManager.setSessionIdCookieEnabled(true);
+
+        sessionManager.setSessionDAO(sessionDAO);
+
+        sessionValidationScheduler.setSessionManager(sessionManager);
+
         return sessionManager;
     }
 
@@ -47,10 +59,11 @@ public class ShiroConfig {
     }
 
     @Bean("securityManager")
-    public SecurityManager securityManager(UserRealm userRealm, SessionManager sessionManager) {
+    public SecurityManager securityManager(UserRealm userRealm, SessionManager sessionManager, SpringCacheManagerWrapper springCacheManagerWrapper) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(userRealm);
         securityManager.setSessionManager(sessionManager);
+        securityManager.setCacheManager(springCacheManagerWrapper);
         return securityManager;
     }
 
@@ -96,6 +109,7 @@ public class ShiroConfig {
 
     /**
      * 处理shiro 生命周期使用
+     *
      * @return
      */
     @Bean("lifecycleBeanPostProcessor")
@@ -105,6 +119,7 @@ public class ShiroConfig {
 
     /**
      * AOP式方法级权限检查
+     *
      * @return
      */
     @Bean
@@ -116,6 +131,7 @@ public class ShiroConfig {
 
     /**
      * 配置shiro 支持权限控制
+     *
      * @param securityManager
      * @return
      */
@@ -126,6 +142,12 @@ public class ShiroConfig {
         return advisor;
     }
 
+    @Bean
+    public SpringCacheManagerWrapper springCacheManagerWrapper(EhCacheCacheManager ehCacheCacheManager) {
+        SpringCacheManagerWrapper shiroCache = new SpringCacheManagerWrapper();
+        shiroCache.setCacheManager(ehCacheCacheManager);
+        return shiroCache;
+    }
 
 
 }
