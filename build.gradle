@@ -32,6 +32,8 @@ ext{
 	shiroVersion = '1.4.0'
 	jwtVersion = '0.7.0'
 	gsonVersion = '2.8.2'
+	commonsLangVersion='2.6'
+	commonsIoVersion = '2.5'
 
 }
 
@@ -53,6 +55,8 @@ dependencies {
 	compile("net.sf.ehcache:ehcache-core:2.5.3")
 	compile('org.springframework.boot:spring-boot-starter-cache')
 	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile("commons-lang:commons-lang:${commonsLangVersion}")
+	compile("commons-io:commons-io:${commonsIoVersion}")
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
