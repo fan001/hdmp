@@ -28,7 +28,7 @@ public class SpringCacheManagerWrapper implements CacheManager {
     public <K, V> Cache<K, V> getCache(String name) throws CacheException {
         org.springframework.cache.Cache springCache = cacheManager.getCache(name);
 
-        return null;
+        return new SpringCacheWrapper(springCache);
     }
 
 

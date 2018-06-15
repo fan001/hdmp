@@ -29,7 +29,7 @@ ext{
 	swaggerVersion = '2.7.0'
 	druidVersion = '1.1.9'
 	mysqlVersion = '5.1.38'
-	shiroVersion = '1.3.2'
+	shiroVersion = '1.4.0'
 	jwtVersion = '0.7.0'
 	gsonVersion = '2.8.2'
 
@@ -44,7 +44,6 @@ dependencies {
 	compile("mysql:mysql-connector-java:${mysqlVersion}")
 	compile("org.apache.shiro:shiro-core:${shiroVersion}")
 	compile("org.apache.shiro:shiro-ehcache:${shiroVersion}")
-	compile("org.apache.shiro:shiro-quartz:${shiroVersion}")
 	compile("org.apache.shiro:shiro-spring:${shiroVersion}")
 	compile("io.jsonwebtoken:jjwt:${jwtVersion}")
 	compile("io.springfox:springfox-swagger2:${swaggerVersion}")

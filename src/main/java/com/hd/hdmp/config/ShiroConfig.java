@@ -6,12 +6,14 @@ import com.hd.hdmp.auth.UserRealm;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
-import org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler;
+import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
+import org.apache.shiro.session.mgt.eis.SessionIdGenerator;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
@@ -33,18 +35,23 @@ public class ShiroConfig {
     @Bean("sessionManager")
     public SessionManager sessionManager() {
 
+        JavaUuidSessionIdGenerator sessionIdGenerator = new JavaUuidSessionIdGenerator();
+
+        SimpleCookie sessionIdCookie = new SimpleCookie("hdmpid");
+        sessionIdCookie.setHttpOnly(true);
+        sessionIdCookie.setMaxAge(-1);
         EnterpriseCacheSessionDAO sessionDAO = new EnterpriseCacheSessionDAO();
-        QuartzSessionValidationScheduler sessionValidationScheduler = new QuartzSessionValidationScheduler();
-        sessionValidationScheduler.setSessionValidationInterval(1800000);
+        sessionDAO.setActiveSessionsCacheName("shiro-activeSessionCache");
+        sessionDAO.setSessionIdGenerator(sessionIdGenerator);
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-        sessionManager.setSessionValidationScheduler(sessionValidationScheduler);
+        sessionManager.setGlobalSessionTimeout(30*1000);
+        sessionManager.setDeleteInvalidSessions(true);
         sessionManager.setSessionValidationSchedulerEnabled(true);
         sessionManager.setSessionIdCookieEnabled(true);
-
         sessionManager.setSessionDAO(sessionDAO);
-
-        sessionValidationScheduler.setSessionManager(sessionManager);
-
+        sessionManager.setSessionValidationInterval(20*1000);
+        sessionManager.setSessionIdCookie(sessionIdCookie);
+        sessionManager.setSessionIdCookieEnabled(true);
         return sessionManager;
     }
 
@@ -59,7 +66,9 @@ public class ShiroConfig {
     }
 
     @Bean("securityManager")
-    public SecurityManager securityManager(UserRealm userRealm, SessionManager sessionManager, SpringCacheManagerWrapper springCacheManagerWrapper) {
+    public SecurityManager securityManager(UserRealm userRealm, SessionManager sessionManager, EhCacheCacheManager ehCacheCacheManager) {
+        SpringCacheManagerWrapper springCacheManagerWrapper = new SpringCacheManagerWrapper();
+        springCacheManagerWrapper.setCacheManager(ehCacheCacheManager);
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(userRealm);
         securityManager.setSessionManager(sessionManager);
@@ -80,9 +89,7 @@ public class ShiroConfig {
         Map<String, String> filterMap = new LinkedHashMap<>();
         filterMap.put("/login", "authc");
         filterMap.put("/**", "authc");
-
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
-
         return shiroFilterFactoryBean;
 
     }
@@ -140,13 +147,6 @@ public class ShiroConfig {
         AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(securityManager);
         return advisor;
-    }
-
-    @Bean
-    public SpringCacheManagerWrapper springCacheManagerWrapper(EhCacheCacheManager ehCacheCacheManager) {
-        SpringCacheManagerWrapper shiroCache = new SpringCacheManagerWrapper();
-        shiroCache.setCacheManager(ehCacheCacheManager);
-        return shiroCache;
     }
 
 
