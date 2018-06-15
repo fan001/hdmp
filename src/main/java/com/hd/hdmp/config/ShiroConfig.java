@@ -36,8 +36,7 @@ public class ShiroConfig {
     public SessionManager sessionManager() {
 
         JavaUuidSessionIdGenerator sessionIdGenerator = new JavaUuidSessionIdGenerator();
-
-        SimpleCookie sessionIdCookie = new SimpleCookie("hdmpid");
+        SimpleCookie sessionIdCookie = new SimpleCookie("sid");
         sessionIdCookie.setHttpOnly(true);
         sessionIdCookie.setMaxAge(-1);
         EnterpriseCacheSessionDAO sessionDAO = new EnterpriseCacheSessionDAO();
@@ -95,20 +94,15 @@ public class ShiroConfig {
     }
 
     @Bean
-    public RetryLimitHashedCredentialsMatcher retryLimitHashedCredentialsMatcher(EhCacheCacheManager ehCacheCacheManager) {
+    public UserRealm userRealm(EhCacheCacheManager ehCacheCacheManager) {
         RetryLimitHashedCredentialsMatcher retryLimitHashedCredentialsMatcher = new RetryLimitHashedCredentialsMatcher();
         retryLimitHashedCredentialsMatcher.setEhCacheCacheManager(ehCacheCacheManager);
         retryLimitHashedCredentialsMatcher.setHashIterations(2);
         retryLimitHashedCredentialsMatcher.setHashAlgorithmName("MD5");
         retryLimitHashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
-        return retryLimitHashedCredentialsMatcher;
-    }
 
-
-    @Bean
-    public UserRealm userRealm(RetryLimitHashedCredentialsMatcher credentialsMatcher) {
         UserRealm userRealm = new UserRealm();
-        userRealm.setCredentialsMatcher(credentialsMatcher);
+        userRealm.setCredentialsMatcher(retryLimitHashedCredentialsMatcher);
         userRealm.setCachingEnabled(false);
         return userRealm;
 
