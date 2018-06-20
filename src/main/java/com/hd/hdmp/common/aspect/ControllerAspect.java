@@ -82,7 +82,6 @@ public class ControllerAspect {
         try {
             params = new Gson().toJson(args);
         } catch (Exception ex) {
-            System.out.println("aaaaaaaaa" + ex);
             log.error("转化方法失败", ex);
         }
         sysLog.setIp(ip);
