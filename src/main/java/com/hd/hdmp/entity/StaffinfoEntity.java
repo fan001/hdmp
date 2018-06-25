@@ -32,6 +32,7 @@ public class StaffinfoEntity {
     private String address;
     private Date birthday;
     private Date lastSignDate;
+    private String openId;
 
 
 

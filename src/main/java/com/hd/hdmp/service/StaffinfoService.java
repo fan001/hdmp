@@ -16,6 +16,13 @@ public class StaffinfoService {
     StaffinfoRepository staffinfoRepository;
 
     public StaffinfoEntity findByUsername(String username){
+
         return staffinfoRepository.findByUsername(username);
+    }
+
+
+    public String getOpenIdFromOauth2(String accountId,String code){
+        return null;
+
     }
 }
