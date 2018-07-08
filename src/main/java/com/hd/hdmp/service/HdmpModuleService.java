@@ -5,6 +5,7 @@ import com.hd.hdmp.common.annotation.SysLog;
 import com.hd.hdmp.common.util.TreeUtil;
 import com.hd.hdmp.entity.HdmpModule;
 import com.hd.hdmp.repository.HdmpModuleRepository;
+import com.hd.hdmp.repository.StaffinfoRepository;
 import com.hd.hdmp.vo.ModuleTree;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import java.util.List;
 public class HdmpModuleService {
     @Autowired
     HdmpModuleRepository moduleRepository;
+
+    @Autowired
+    StaffinfoRepository staffinfoRepository;
 
 
     public List<HdmpModule> listAllModule() {
@@ -39,5 +43,9 @@ public class HdmpModuleService {
         });
         return TreeUtil.buildByRecursive(moduleTrees, 142);
 
+    }
+
+    public void test(){
+        staffinfoRepository.searchBydes();
     }
 }

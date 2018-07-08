@@ -35,15 +35,15 @@ public class ModuleController extends BaseController {
 
         ResultBean<List<ModuleTree>> resultBean =
                 new ResultBean<>(moduleService.listModuleTree());
-        if (1 == 1) {
-            throw new BaseException("测试错误");
-        }
+
+
         return resultBean;
 
     }
 
     @GetMapping("/test1")
     public ResultBean testResultBean(String username) {
+        moduleService.test();
         return new ResultBean<>("aaaaa");
 
     }
@@ -58,6 +58,7 @@ public class ModuleController extends BaseController {
 
         return "nolog";
     }
+
 
 
 }
