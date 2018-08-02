@@ -50,6 +50,7 @@ public class ControllerAspect {
 
         try {
             resultBean = (ResultBean<?>) point.proceed();
+
         } catch (Throwable e) {
             log.error("we com across a exception");
             log.error(e.getMessage(), e);
