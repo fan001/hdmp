@@ -7,7 +7,6 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
-import org.apache.shiro.session.mgt.eis.SessionIdGenerator;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -83,11 +82,14 @@ public class ShiroConfig {
         //oauth过滤
         Map<String, Filter> filters = new HashMap<>();
         filters.put("authc", formAuthenticationFilter);
+        filters.put("wework", new WeworkFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
         Map<String, String> filterMap = new LinkedHashMap<>();
+        filterMap.put("/static/WW_verify_g5IhUZNec6dwTooe.txt", "anon");
+        filterMap.put("/api", "anon");
         filterMap.put("/login", "authc");
-        filterMap.put("/**", "authc");
+        filterMap.put("/**", "wework");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
 

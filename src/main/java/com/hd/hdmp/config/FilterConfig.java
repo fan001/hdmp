@@ -1,6 +1,5 @@
 package com.hd.hdmp.config;
 
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,10 +36,4 @@ public class FilterConfig {
         registration.setOrder(Integer.MAX_VALUE);
         return registration;
     }
-
-
-
-
-
-
 }
