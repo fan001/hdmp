@@ -1,0 +1,10 @@
+#for connect SAP !
+#Mon Jul 30 15:03:26 CST 2018
+jco.client.lang=zh
+jco.destination.peak_limit=10
+jco.client.client=600
+jco.client.passwd=Hpi12345
+jco.client.user=CRMRFC
+jco.client.sysnr=00
+jco.destination.pool_capacity=3
+jco.client.ashost=10.55.66.17

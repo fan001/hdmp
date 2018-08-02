@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
-@Component
 public class WeworkUserService {
     @Autowired
     WeworkUserModelRepository weworkUserModelRepository;

@@ -3,6 +3,7 @@ package com.hd.hdmp.config;
 import com.hd.hdmp.auth.FormAuthenticationExtendFilter;
 import com.hd.hdmp.auth.RetryLimitHashedCredentialsMatcher;
 import com.hd.hdmp.auth.UserRealm;
+import com.hd.hdmp.service.wework.WeworkUserService;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
@@ -94,6 +95,12 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
 
     }
+
+    @Bean("WeworkUserService")
+    public WeworkUserService weworkUserService(){
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^");
+        return new WeworkUserService();
+    };
 
     @Bean
     public UserRealm userRealm(EhCacheCacheManager ehCacheCacheManager) {

@@ -1,0 +1,90 @@
+
+**** Error file opened at 20180730 151455 China Standard Time Rel 3.0.5 (2010-03-03) [720.38]
+Error:  >Mon Jul 30 15:14:55,379<    >RfcGetException rc (3) message: CPIC-CALL: CMRCV on convId: 45169587
+
+ERROR       connection to partner '10.55.66.17:3300' broken
+TIME        Mon Jul 30 15:14:55 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -6
+MODULE      nixxi.cpp
+LINE        4970
+DETAIL      NiIRead: P=10.55.66.17:3300; L=0.0.0.0:57810
+SYSTEM CALL recv
+ERRNO       10053
+ERRNO TEXT  WSAECONNABORTED: Software caused connection abort
+COUNTER     3
+
+<RfcGetException
+
+Error: [1] >Mon Jul 30 15:14:55,383<    RfcException: [CAT|crmapptest]
+    message: CPIC-CALL: CMRCV on convId: 45169587
+
+ERROR       connection to partner '10.55.66.17:3300' broken
+TIME        Mon Jul 30 15:14:55 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -6
+MODULE      nixxi.cpp
+LINE        4970
+DETAIL      NiIRead: P=10.55.66.17:3300; L=0.0.0.0:57810
+SYSTEM CALL recv
+ERRNO       10053
+ERRNO TEXT  WSAECONNABORTED: Software caused connection abort
+COUNTER     3
+
+    Return code: RFC_SYS_EXCEPTION(3)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+Exception raised by CAT|crmapptest
+
+Error:  >Mon Jul 30 16:15:39,631<    RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=ABAP_AS_WITH_POOL ASHOST=10.55.66.17 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.55.66.17:3300' not reached
+TIME        Mon Jul 30 16:15:39 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3255
+DETAIL      NiPConnect2: 10.55.66.17:3300
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20180730 161656 China Standard Time Rel 3.0.5 (2010-03-03) [720.38]
+Error:  >Mon Jul 30 16:16:56,188<    RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=ABAP_AS_WITH_POOL ASHOST=10.55.66.17 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.55.66.17:3300' not reached
+TIME        Mon Jul 30 16:16:56 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3255
+DETAIL      NiPConnect2: 10.55.66.17:3300
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
