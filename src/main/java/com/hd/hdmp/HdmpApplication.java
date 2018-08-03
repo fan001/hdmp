@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
 public class HdmpApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(HdmpApplication.class, args);
 	}
 }
